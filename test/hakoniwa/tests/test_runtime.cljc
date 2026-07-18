@@ -12,7 +12,7 @@
             [hakoniwa.methods.autorun :as autorun]
             [hakoniwa.methods.kotoba :as k]))
 
-(def ^:private actor-dir (-> *file* io/file .getParentFile .getParentFile))
+(def ^:private actor-dir (io/file (System/getProperty "user.dir")))
 (def ^:private seed-file (io/file actor-dir "data" "seed-scenario.kotoba.edn"))
 
 (defn- dist-fixture []

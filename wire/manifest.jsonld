@@ -13,7 +13,7 @@
   "tier": "B",
   "adr": "2606111500",
   "dependsOnAdr": ["2606111400", "2606051800", "2606042330", "2606091200", "2605242600", "2605241900", "2605215000", "2605312345", "2605231525", "2605181100"],
-  "schema": ["00-contracts/schemas/hakoniwa-scenario-ontology.kotoba.edn"],
+  "schema": ["schema/hakoniwa-scenario-ontology.kotoba.edn"],
   "substrate": {
     "state": "kotoba Datom log (ADR-2605312345) — methods/datom_emit.py emits canonical EAVT (ground world + run config; distribution is transient)",
     "engine": "methods/simulate.py — Friedkin-Johnsen opinion-dynamics kernel over the box; K-replica ensemble with DETERMINISTIC seeded anchor jitter (sha256, no Math.random, pywasm-portable)",

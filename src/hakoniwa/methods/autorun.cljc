@@ -21,7 +21,7 @@
 
 #?(:clj
    (def seed-path
-     (str (System/getProperty "user.dir") "/20-actors/hakoniwa/data/seed-scenario.kotoba.edn")))
+     (str (System/getProperty "user.dir") "/data/seed-scenario.kotoba.edn")))
 #?(:clj (def log-path k/log-default))
 (def base-as-of 20260611)
 

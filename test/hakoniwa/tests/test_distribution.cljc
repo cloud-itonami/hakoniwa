@@ -21,8 +21,7 @@
             [hakoniwa.methods.datom-emit :as datom-emit]))
 
 (def scenario
-  (-> (io/file *file*) .getParentFile .getParentFile
-      (io/file "data" "seed-scenario.kotoba.edn") str))
+  (str (io/file (System/getProperty "user.dir") "data" "seed-scenario.kotoba.edn")))
 
 (defn- dist-fixture []
   (let [{:keys [nodes edges]} (world/load-file* scenario)

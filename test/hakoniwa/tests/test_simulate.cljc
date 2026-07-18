@@ -17,8 +17,7 @@
             [hakoniwa.methods.simulate :as simulate]))
 
 (def scenario
-  (-> (io/file *file*) .getParentFile .getParentFile
-      (io/file "data" "seed-scenario.kotoba.edn") str))
+  (str (io/file (System/getProperty "user.dir") "data" "seed-scenario.kotoba.edn")))
 
 (deftest test-load-nontrivial-and-synthetic
   (let [{:keys [nodes edges]} (world/load-file* scenario)
