@@ -1,6 +1,6 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; hakoniwa 箱庭 — tests for distribution-entropy (effective number of possible futures).
-;; Run:  bb -cp "20-actors:20-actors/kotodama/src" 20-actors/hakoniwa/tests/test_distribution_entropy.cljc
+;; Run:  kbb -cp "20-actors:20-actors/kotodama/src" 20-actors/hakoniwa/tests/test_distribution_entropy.cljc
 (ns hakoniwa.tests.test-distribution-entropy
   "Tests for distribution-entropy — the Shannon entropy + effective number of outcomes (perplexity)
   of the forecast histogram: 1.0 for consensus, ≈2.0 for a bimodal/two-futures forecast, the full
