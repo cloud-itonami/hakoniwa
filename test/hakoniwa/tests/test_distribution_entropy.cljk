@@ -6,7 +6,7 @@
   of the forecast histogram: 1.0 for consensus, ≈2.0 for a bimodal/two-futures forecast, the full
   bin count for maximal uncertainty. Distribution-shape only (no point, G2; non-steering, G3)."
   (:require [hakoniwa.methods.distribution :as d]
-            [clojure.test :refer [deftest is run-tests]]))
+            [kotoba.test :refer [deftest is run-tests]]))
 
 (defn- close? [x y] (< (Math/abs (- (double x) (double y))) 1e-6))
 

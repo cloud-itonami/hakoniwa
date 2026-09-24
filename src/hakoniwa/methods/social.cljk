@@ -13,7 +13,7 @@
     G7 — :post/server-held-key false; a :published post REQUIRES a member-DID author.
 
   Pure + deterministic body. The Python `__main__` demo printer is omitted."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def disclaimer
   (str "【箱庭シミュレーション / 架空ペルソナによる可能性分布 — 予測の断定ではありません。"
@@ -37,8 +37,8 @@
   (it NAMES the tokens to disclaim them) — mirrors social._scan."
   [body tokens]
   (let [scanned (str/replace body disclaimer "")
-        low (str/lower-case scanned)]
-    (some (fn [t] (when (str/includes? low (str/lower-case t)) t)) tokens)))
+        low (str/lower scanned)]
+    (some (fn [t] (when (str/includes? low (str/lower t)) t)) tokens)))
 
 (defn- guard-no-point [body]
   (when-let [t (scan body point-tokens)]

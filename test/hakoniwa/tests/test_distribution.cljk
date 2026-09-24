@@ -12,9 +12,9 @@
     - the Datom log emits ground :add datoms, marks every persona synthetic, flags the
       distribution transient, and emits no point datom
     - determinism (two emits byte-identical)."
-  (:require [clojure.test :refer [deftest is run-tests]]
-            [clojure.string :as str]
-            [clojure.java.io :as io]
+  (:require [kotoba.test :refer [deftest is run-tests]]
+            [kotoba.lang.text :as str]
+            [kotoba.io :as io]
             [hakoniwa.methods.world :as world]
             [hakoniwa.methods.simulate :as simulate]
             [hakoniwa.methods.distribution :as distribution]

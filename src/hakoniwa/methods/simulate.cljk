@@ -22,7 +22,7 @@
 
   House style: Python ':…' keyword strings stay strings; pure fns; inference/I/O at #?(:clj)
   edges (this module is pure). Portable .cljc."
-  (:require [hakoniwa.methods.world :as world]
+  (:require [kotoba.lang.text] [hakoniwa.methods.world :as world]
             #?(:clj [clojure.java.io :as io])))
 
 (def default-steps 12)
@@ -235,7 +235,7 @@
      [& argv]
      (let [argv (vec argv)
            here (-> *file* io/file .getParentFile .getParentFile)
-           scenario (if (and (seq argv) (not (clojure.string/starts-with? (first argv) "--")))
+           scenario (if (and (seq argv) (not (kotoba.lang.text/starts-with? (first argv) "--")))
                       (io/file (first argv))
                       (io/file here "data" "seed-scenario.kotoba.edn"))
            opt (fn [flag dflt cast]

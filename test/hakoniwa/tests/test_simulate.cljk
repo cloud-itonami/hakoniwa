@@ -11,8 +11,8 @@
     - determinism: identical (seed, steps, replicas) → byte-identical ensemble
     - a stronger official-relay signal raises the town-wide mean (mechanism sanity)
     - the ensemble actually has spread (a distribution, not a degenerate point)."
-  (:require [clojure.test :refer [deftest is run-tests]]
-            [clojure.java.io :as io]
+  (:require [kotoba.test :refer [deftest is run-tests]]
+            [kotoba.io :as io]
             [hakoniwa.methods.world :as world]
             [hakoniwa.methods.simulate :as simulate]))
 
