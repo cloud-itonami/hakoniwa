@@ -3,7 +3,7 @@
   1:1 Clojure port of tests/test_ingest.py (ADR-2606111500). Network-free (offline fixture)."
   (:require [clojure.test :refer [deftest is run-tests]]
             [clojure.string :as str]
-            [clojure.edn :as edn]
+            [kotoba.lang.edn :as edn]
             #?(:clj [clojure.java.io :as io])
             [hakoniwa.methods.world :as w]
             [hakoniwa.methods.simulate :as s]
