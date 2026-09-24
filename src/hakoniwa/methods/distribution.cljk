@@ -18,7 +18,7 @@
   keys preserving insertion order (byte-parity with the Python dict). Float arithmetic is IEEE
   double (== CPython). Formatting: `{v:g}` via fmt-g, `{v:.4f}`/`{v:.1f}` via HALF_EVEN
   BigDecimal on the exact double (matches Python's format). Pure fns; file I/O at #?(:clj) edge."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [hakoniwa.methods.world :as world]
             [hakoniwa.methods.simulate :as simulate]
             #?(:clj [clojure.java.io :as io])))

@@ -16,7 +16,7 @@
   House style: Python ':…' keyword strings stay strings; node/edge walk in EDN read order
   (byte-parity); float formatting mirrors Python's {v:g} (fmt-g). Reuses world (load/selectors)
   + distribution (fmt-g). Pure fns; file I/O at the #?(:clj) edge."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [hakoniwa.methods.world :as world]
             [hakoniwa.methods.simulate :as simulate]
             [hakoniwa.methods.distribution :as distribution]

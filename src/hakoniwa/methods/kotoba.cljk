@@ -10,7 +10,7 @@
 
   Self-contained: own sha-256 + canonical-JSON + EDN reader (no third-party deps). File I/O behind
   #?(:clj ...). Deterministic — the caller supplies tx_id + as-of; no wall clock."
-  (:require [clojure.string :as str]
+  (:require [kotoba.bytes :as kbytes] [kotoba.lang.text :as str]
             #?(:clj [clojure.java.io :as io])
             [hakoniwa.methods.world :as w]))
 
@@ -70,7 +70,7 @@
 
 ;; ── sha-256 hex ──────────────────────────────────────────────────────────────────────────────
 (defn- sha256-hex ^String [^String s]
-  (let [d (.digest (java.security.MessageDigest/getInstance "SHA-256") (.getBytes s "UTF-8"))]
+  (let [d (.digest (java.security.MessageDigest/getInstance "SHA-256") (kbytes/utf8-bytes s))]
     (apply str (map #(format "%02x" (bit-and % 0xff)) d))))
 
 ;; ── canonical JSON (mirrors json.dumps(ensure_ascii=False, sort_keys=True, separators=(",",":"))) ─

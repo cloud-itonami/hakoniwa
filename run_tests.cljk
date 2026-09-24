@@ -1,4 +1,4 @@
-(require '[clojure.test :as t])
+(require '[kotoba.test :as t])
 (def suites '[hakoniwa.tests.test-distribution hakoniwa.tests.test-distribution-entropy
               hakoniwa.tests.test-ingest hakoniwa.tests.test-runtime
               hakoniwa.tests.test-simulate hakoniwa.murakumo-test

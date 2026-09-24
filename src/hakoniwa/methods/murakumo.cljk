@@ -12,7 +12,8 @@
   TEMPLATE narration / the scalar kernel and sets ':via :template-fallback' / ':kernel-fallback'.
 
   Network I/O is behind #?(:clj ...); the fallback paths are pure + deterministic. The Python
-  `__main__` demo printer is omitted.")
+  `__main__` demo printer is omitted."
+  (:require [kotoba.lang.text]))
 
 (def gateway "http://127.0.0.1:4000/v1/chat/completions")
 (def model "gemma3:4b")
@@ -64,7 +65,7 @@
                      q2 (loop [i 0] (cond (>= i (count rest)) -1
                                           (and (= (nth rest i) \") (or (zero? i) (not= (nth rest (dec i)) \\))) i
                                           :else (recur (inc i))))]
-                 (when (>= q2 0) (clojure.string/trim (subs rest 0 q2))))))
+                 (when (>= q2 0) (kotoba.lang.text/trim (subs rest 0 q2))))))
            nil))
        (catch Exception _ nil))
      :cljs nil))
@@ -121,7 +122,7 @@
               text (chat "0〜1の数値のみを返す。説明不要。" user 0.0)]
           (when text
             (try
-              (let [v (Double/parseDouble (first (clojure.string/split (clojure.string/trim text) #"\s+")))]
+              (let [v (Double/parseDouble (first (kotoba.lang.text/split (kotoba.lang.text/trim text) #"\s+")))]
                 {"stance" (clamp v) "via" ":murakumo"})
               (catch Exception _ nil)))))
       (let [nx (+ (* (double susceptibility) (double neighbour-mean))

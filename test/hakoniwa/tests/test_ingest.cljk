@@ -1,10 +1,10 @@
 (ns hakoniwa.tests.test-ingest
   "test_ingest.py — hakoniwa 箱庭 real-entity ingest + LLM-persona swarm tests (R1).
   1:1 Clojure port of tests/test_ingest.py (ADR-2606111500). Network-free (offline fixture)."
-  (:require [clojure.test :refer [deftest is run-tests]]
-            [clojure.string :as str]
+  (:require [kotoba.test :refer [deftest is run-tests]]
+            [kotoba.lang.text :as str]
             [kotoba.lang.edn :as edn]
-            #?(:clj [clojure.java.io :as io])
+            #?(:clj [kotoba.io :as io])
             [hakoniwa.methods.world :as w]
             [hakoniwa.methods.simulate :as s]
             [hakoniwa.methods.distribution :as d]

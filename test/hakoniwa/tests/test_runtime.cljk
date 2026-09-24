@@ -1,9 +1,9 @@
 (ns hakoniwa.tests.test-runtime
   "test_runtime.py — hakoniwa 箱庭 runtime tests: social emission + Murakumo fallback + autonomous
   loop. 1:1 Clojure port of tests/test_runtime.py (ADR-2606111500 R1). Network-free, deterministic."
-  (:require [clojure.test :refer [deftest is run-tests]]
-            [clojure.string :as str]
-            #?(:clj [clojure.java.io :as io])
+  (:require [kotoba.test :refer [deftest is run-tests]]
+            [kotoba.lang.text :as str]
+            #?(:clj [kotoba.io :as io])
             [hakoniwa.methods.world :as w]
             [hakoniwa.methods.simulate :as s]
             [hakoniwa.methods.distribution :as d]

@@ -14,8 +14,8 @@
 
   Self-contained sha-256 + JSON reader (for the fixture / live response). Network fetch + the
   file-writing main are behind #?(:clj ...). The Python `__main__` printer is omitted."
-  (:require [clojure.string :as str]
-            [clojure.set :as set]
+  (:require [kotoba.bytes :as kbytes] [kotoba.lang.text :as str]
+            [kotoba.lang.coll :as set]
             [hakoniwa.methods.world :as w]
             [hakoniwa.methods.cid :as cidlib]))
 
@@ -91,7 +91,7 @@
 ;; ── deterministic hash helpers (mirror _h / _u: sha256 first 6 bytes big-endian) ─────────────
 (defn- h-int ^long [& parts]
   (let [d (.digest (java.security.MessageDigest/getInstance "SHA-256")
-                   (.getBytes ^String (str/join ":" (map str parts)) "UTF-8"))]
+                   (kbytes/utf8-bytes ^String (str/join ":" (map str parts))))]
     (reduce (fn [acc i] (bit-or (bit-shift-left acc 8) (bit-and (long (aget d i)) 0xff)))
             0 (range 6))))
 
@@ -167,7 +167,7 @@
                       (let [p31s (set (p31 ent))]
                         (if (seq (set/intersection p31s person-classes))
                           [nodes kept (conj dropped {"qid" qid "reason" "natural-person (P31∈person-classes)"})]
-                          (let [eid (str "entity.wd-" (str/lower-case qid))]
+                          (let [eid (str "entity.wd-" (str/lower qid))]
                             [(assoc nodes eid {":sim/id" eid ":sim/kind" ":entity" ":sim/label" (ent-label ent)
                                                ":sim/sourcing" ":authoritative" ":entity/public-ref" (str "wd:" qid)})
                              (conj kept {"qid" qid "label" (ent-label ent) "eid" eid})

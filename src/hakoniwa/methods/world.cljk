@@ -20,9 +20,9 @@
 
   The embedded EDN reader mirrors world.py's `_TOK`/`_atom`/`_parse`/`read_edn` — the same
   family as mitooshi.methods.analyze and shionome.methods.edn (logic byte-identical)."
-  (:require [clojure.string :as str]
-            [clojure.set]
-            #?(:clj [clojure.java.io :as io])))
+  (:require [kotoba.lang.text :as str]
+            [kotoba.lang.coll]
+            #?(:clj [kotoba.io :as io])))
 
 ;; ── minimal EDN reader (subset: vectors [], maps {}, :keyword, "string", num, bool, nil) ──
 ;; _TOK = re.compile(r'[\s,]+|;[^\n]*|(\[|\]|\{|\}|"(?:\\.|[^"\\])*"|[^\s,\[\]{}]+)')
@@ -132,7 +132,7 @@
         (when-not (true? (get n ":persona/synthetic"))
           (throw (ex-info (str "G1 violation: persona " nid " is not marked :persona/synthetic true")
                           {:gate "G1" :persona nid})))
-        (let [leaked (clojure.set/intersection (set (keys n)) forbidden-persona-fields)]
+        (let [leaked (kotoba.lang.coll/intersection (set (keys n)) forbidden-persona-fields)]
           (when (seq leaked)
             (throw (ex-info (str "G1 violation: persona " nid " carries PII-class field(s) " leaked)
                             {:gate "G1" :persona nid :leaked leaked}))))))))
