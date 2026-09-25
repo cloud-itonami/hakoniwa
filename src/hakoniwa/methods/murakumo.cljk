@@ -13,7 +13,7 @@
 
   Network I/O is behind #?(:clj ...); the fallback paths are pure + deterministic. The Python
   `__main__` demo printer is omitted."
-  (:require [kotoba.lang.text]))
+  (:require [kotoba.bytes :as kbytes] [kotoba.lang.text]))
 
 (def gateway "http://127.0.0.1:4000/v1/chat/completions")
 (def model "gemma3:4b")
@@ -53,7 +53,7 @@
                (.setRequestProperty "Content-Type" "application/json")
                (.setDoOutput true))]
          (with-open [os (.getOutputStream conn)]
-           (.write os (.getBytes ^String body "UTF-8")))
+           (.write os (kbytes/utf8-bytes ^String body)))
          (if (= 200 (.getResponseCode conn))
            (let [resp (slurp (.getInputStream conn))
                  ;; minimal extraction of choices[0].message.content

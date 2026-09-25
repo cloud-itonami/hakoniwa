@@ -11,7 +11,7 @@
   Self-contained: own sha-256 + canonical-JSON + EDN reader (no third-party deps). File I/O behind
   #?(:clj ...). Deterministic — the caller supplies tx_id + as-of; no wall clock."
   (:require [kotoba.bytes :as kbytes] [kotoba.lang.text :as str]
-            #?(:clj [clojure.java.io :as io])
+            #?(:clj [kotoba.io :as io])
             [hakoniwa.methods.world :as w]))
 
 #?(:clj
@@ -143,7 +143,7 @@
      ([tx log-path]
       (let [f (io/file (str log-path))]
         (io/make-parents f)
-        (when-not (.exists f)
+        (when-not (io/exists? f)
           (spit f (str ";; hakoniwa 箱庭 kotoba Datom log — append-only EAVT transactions "
                        "(content-addressed DAG). DO NOT hand-edit. ADR-2606111500.\n")))
         (spit f (str (tx->edn tx) "\n") :append true)
@@ -210,7 +210,7 @@
      ([] (read-log log-default))
      ([log-path]
       (let [f (io/file (str log-path))]
-        (if-not (.exists f)
+        (if-not (io/exists? f)
           []
           (->> (str/split-lines (slurp f))
                (map str/trim)

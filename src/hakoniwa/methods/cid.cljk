@@ -5,11 +5,11 @@
   `ipfs add --cid-version=1 --raw-leaves` produces for a single raw block (< 256 KiB).
   Single-block by design (hakoniwa ingests a BOUNDED slice → one raw block). Public
   surface (base32 / cidv1-raw / single-block-limit) is unchanged."
-  (:require [multiformats.core :as mf]))
+  (:require [kotoba.bytes :as kbytes] [multiformats.core :as mf]))
 
 #?(:clj
    (defn- ->ba ^bytes [data]
-     (cond (string? data) (.getBytes ^String data "UTF-8")
+     (cond (string? data) (kbytes/utf8-bytes ^String data)
            (bytes? data)  data
            :else (byte-array (map #(unchecked-byte (bit-and (int %) 0xff)) data)))))
 

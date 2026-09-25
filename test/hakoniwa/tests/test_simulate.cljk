@@ -11,7 +11,7 @@
     - determinism: identical (seed, steps, replicas) → byte-identical ensemble
     - a stronger official-relay signal raises the town-wide mean (mechanism sanity)
     - the ensemble actually has spread (a distribution, not a degenerate point)."
-  (:require [kotoba.test :refer [deftest is run-tests]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is run-tests]]
             [kotoba.io :as io]
             [hakoniwa.methods.world :as world]
             [hakoniwa.methods.simulate :as simulate]))
@@ -41,11 +41,11 @@
   (let [base (fn [extra] (str "[{:sim/id \"persona.x\" :sim/kind :persona :sim/label \"x\" " extra "}]"))]
     ;; missing synthetic marker
     (let [nodes (read-nodes (base ""))
-          raised (try (world/assert-synthetic nodes) false (catch clojure.lang.ExceptionInfo _ true))]
+          raised (try (world/assert-synthetic nodes) false (catch kerror/ExceptionInfo _ true))]
       (is raised "load accepted a persona with no :persona/synthetic marker (G1 breach)"))
     ;; PII-bearing persona, even if marked synthetic
     (let [nodes2 (read-nodes (base ":persona/synthetic true :email \"a@b.c\""))
-          raised (try (world/assert-synthetic nodes2) false (catch clojure.lang.ExceptionInfo _ true))]
+          raised (try (world/assert-synthetic nodes2) false (catch kerror/ExceptionInfo _ true))]
       (is raised "load accepted a PII-bearing persona (G1 breach)"))))
 
 (deftest test-kernel-converges-in-unit-interval
