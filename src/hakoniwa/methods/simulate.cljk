@@ -22,8 +22,8 @@
 
   House style: Python ':…' keyword strings stay strings; pure fns; inference/I/O at #?(:clj)
   edges (this module is pure). Portable .cljc."
-  (:require [kotoba.lang.text] [hakoniwa.methods.world :as world]
-            #?(:clj [clojure.java.io :as io])))
+  (:require [kotoba.bytes :as kbytes] [kotoba.lang.text] [hakoniwa.methods.world :as world]
+            #?(:clj [kotoba.io :as io])))
 
 (def default-steps 12)
 (def default-replicas 64)
@@ -40,7 +40,7 @@
   "SHA-256 digest of a UTF-8 string → byte-array (mirrors hashlib.sha256(s.encode).digest())."
   [^String s]
   #?(:clj (.digest (java.security.MessageDigest/getInstance "SHA-256")
-                   (.getBytes s "UTF-8"))
+                   (kbytes/utf8-bytes s))
      :cljs (throw (ex-info "sha256 jitter requires the :clj edge" {}))))
 
 (defn jitter
@@ -234,7 +234,7 @@
      "CLI entry (file I/O at the edge): ensemble summary over the seed scenario."
      [& argv]
      (let [argv (vec argv)
-           here (-> *file* io/file .getParentFile .getParentFile)
+           here (-> *file* io/file io/parent-file io/parent-file)
            scenario (if (and (seq argv) (not (kotoba.lang.text/starts-with? (first argv) "--")))
                       (io/file (first argv))
                       (io/file here "data" "seed-scenario.kotoba.edn"))

@@ -12,7 +12,7 @@
     - the Datom log emits ground :add datoms, marks every persona synthetic, flags the
       distribution transient, and emits no point datom
     - determinism (two emits byte-identical)."
-  (:require [kotoba.test :refer [deftest is run-tests]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is run-tests]]
             [kotoba.lang.text :as str]
             [kotoba.io :as io]
             [hakoniwa.methods.world :as world]
@@ -51,7 +51,7 @@
   (let [{:keys [nodes dist meta]} (dist-fixture)]
     (doseq [bad [":trade" ":wager" ":position" ":target" ":manipulate" ":campaign"]]
       (let [raised (try (distribution/forecast-record nodes dist meta "t" bad) false
-                        (catch clojure.lang.ExceptionInfo _ true))]
+                        (catch kerror/ExceptionInfo _ true))]
         (is raised (str "G3 breach: forecast accepted non-resilience use " bad))))))
 
 (deftest test-forecast-edn-roundtrips-distribution-only

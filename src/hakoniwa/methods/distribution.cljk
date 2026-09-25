@@ -21,7 +21,7 @@
   (:require [kotoba.lang.text :as str]
             [hakoniwa.methods.world :as world]
             [hakoniwa.methods.simulate :as simulate]
-            #?(:clj [clojure.java.io :as io])))
+            #?(:clj [kotoba.io :as io])))
 
 ;; RESILIENCE-only use enum (G3). Steering/speculation uses are NOT members → unrepresentable.
 (def allowed-use #{":resilience" ":preparedness" ":robustness" ":research"})
@@ -241,7 +241,7 @@
      "CLI entry (file I/O at the edge): distribution-report.md + forecast-record.kotoba.edn."
      [& argv]
      (let [argv (vec argv)
-           here (-> *file* io/file .getParentFile .getParentFile)
+           here (-> *file* io/file io/parent-file io/parent-file)
            scenario (if (and (seq argv) (not (str/starts-with? (first argv) "--")))
                       (io/file (first argv))
                       (io/file here "data" "seed-scenario.kotoba.edn"))
@@ -256,7 +256,7 @@
            [results meta] (simulate/ensemble nodes edges {:steps steps :replicas replicas :seed seed})
            dist (distribution results)
            rec (forecast-record nodes dist meta as-of)]
-       (.mkdirs outdir)
+       (io/mkdirs outdir)
        (spit (io/file outdir "distribution-report.md") (report-md nodes dist meta as-of))
        (spit (io/file outdir "forecast-record.kotoba.edn") (forecast-edn rec))
        (println (str "hakoniwa distribution → " (io/file outdir "distribution-report.md")))
