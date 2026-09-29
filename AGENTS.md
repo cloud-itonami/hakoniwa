@@ -80,7 +80,7 @@ hakoniwa is the missing generative layer between them, built so the core inversi
 
 ```
 20-actors/hakoniwa/
-├── CLAUDE.md                              # this file
+├── AGENTS.md                              # this file
 ├── README.md                             # short orientation
 ├── manifest.jsonld                        # actor manifest (4 cells, 8 gates)
 ├── deps.toml                             # per-actor manifest (pure-stdlib, no third-party)

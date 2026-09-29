@@ -32,7 +32,7 @@ python3 methods/datom_emit.py     # → out/scenario-datoms.kotoba.edn (canonica
 python3 tests/test_simulate.py && python3 tests/test_distribution.py   # 13 green
 ```
 
-See `CLAUDE.md` for the constitutional gates (G1–G8), the Friedkin-Johnsen kernel, and the
+See `AGENTS.md` for the constitutional gates (G1–G8), the Friedkin-Johnsen kernel, and the
 ontology. The seed scenario (`data/seed-scenario.kotoba.edn`) is a fictional town weighing a
 sonae 備え-aligned flood-preparedness drill — a resilience lens, never a prediction asserted
 as fact.
